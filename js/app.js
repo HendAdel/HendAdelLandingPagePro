@@ -53,7 +53,7 @@ for (const section of sectionsList) {
     // append the lik to its nav item
     navItem.appendChild(sectionLink);
     // add css classes to the nav item
-    navItem.className = "btn";
+    navItem.className = "menu__link";
     // append the nav item to the document fragment
     navigationFragment.appendChild(navItem);
     console.log(navigationFragment);
@@ -64,6 +64,7 @@ navMenu.appendChild(navigationFragment);
 console.log(navMenu);
 console.log("in the end of buildNavgation function");
 }
+
 // Add class 'active' to section when near top of viewport
 const scrollListener = window.addEventListener('scroll', setActiveSection());
 function setActiveSection(){
@@ -108,6 +109,16 @@ function setActiveSection(){
 }
 // Scroll to anchor ID using scrollTO event
 
+const links = document.querySelectorAll('input');
+const thirdField = links[2];
+for (const navItem of navMenu.children) {
+ 
+    navItem.addEventListener('click', function scrollToSection(event) {
+    console.log('a link clicked');
+    event.preventDefault;
+    navItem.scrollIntoView({behavior:"smooth", block: "center"});
+});   
+}
 
 
 /**
@@ -118,10 +129,6 @@ function setActiveSection(){
 
 // Build menu 
 
-// Scroll to section on link click
-const navLinks = document.querySelectorAll('li');
-for (const navLink of navLinks) {
-    navLink.addEventListener('click', scrollToSection);
-}
+
 
 // Set sections as active

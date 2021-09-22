@@ -1,0 +1,2 @@
+# Landing Page Project
+> The landing page project is a one page website, that have 4 sections, with navigation menu to navegat among them. It created for test what I have learned in front end web development scholarship. section javascript & DOM3
