@@ -108,7 +108,26 @@ section {
     color: darkred;
     background-color: olivedrab;
 }
-
+.navbar__menu a {
+    display: block;
+    height: 40px;
+    padding: 0 20px;
+    line-height: 40px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #323232;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.3s ease-in;
+  }
+  .navbar__menu a:hover,
+  .navbar__menu a:active,
+  .navbar__menu a:focus {
+    background-color: rgba(184,214,168,0.5);
+  }
+  .navbar__menu a.active {
+    background-color: rgba(184,214,168,0.5);
+  }
 
 /* Header Styles */
 .page__header {
