@@ -22,9 +22,18 @@ const sectionsList = document.querySelectorAll('section');
 
 // Save the ul elment to variable to add navgation items to it
 const navMenu = document.getElementById('navbar__list');
+// Make a document fragment to add the nav. menu to it.
+const navigationFragment = document.createDocumentFragment();
+const links = document.querySelectorAll('a');
 
-// Add event listener to build the navgation menu, after DOM loaded
-document.addEventListener('DOMContentLoaded', buildNavgation());
+// init the observer
+const options = {
+    threshold: 0.50
+}
+
+
+// Add class 'active' to section when near top of viewport
+const observer = new IntersectionObserver(setActiveSection, options);
 
 /**
  * End Global Variables
@@ -32,7 +41,8 @@ document.addEventListener('DOMContentLoaded', buildNavgation());
  * 
 */
 
-
+// Add event listener to build the navgation menu, after DOM loaded
+document.addEventListener('DOMContentLoaded', buildNavgation());
 
 
 /**
@@ -41,125 +51,9 @@ document.addEventListener('DOMContentLoaded', buildNavgation());
  * 
 */
 
-// build the navgation menu
-function buildNavgation(){
-
-    // Make a document fragment to add the nav. menu to it.
-const navigationFragment = document.createDocumentFragment();
-
-// Populate the navbar list with nav items
-for (const section of sectionsList) {
-
-    // create nave item and its link
-    const navItem = document.createElement('li');
-    const sectionLink = document.createElement('a');
-    sectionLink.href = `#${section.id}`;
-    sectionLink.className = "menu__link";
-    if(section.id === "section1"){
-        sectionLink.classList.add('active');
-    }
-    let sectionNo = section.dataset.nav;
-    sectionLink.innerText = `${sectionNo}`;
-
-    // append the lik to its nav item
-    navItem.appendChild(sectionLink);
-    // add css classes to the nav item
-    navItem.className = "menu__link";
-    // append the nav item to the document fragment
-    navigationFragment.appendChild(navItem);
-
-    //TODO: Delete after finish testings
-    console.log(navigationFragment);
-    
-}
-// Add the document fragment to ul elment
-navMenu.appendChild(navigationFragment);
-
-//TODO: Delete after finish testings
-console.log(navMenu);
-console.log("in the end of buildNavgation function");
-}
-
-// init the observer
-const options = {
-	threshold: 0.50
-}
-
-
-// Add class 'active' to section when near top of viewport
-const observer = new IntersectionObserver(setActiveSection, options);
-// const scrollListener = window.addEventListener('scroll', setActiveSection());
-
-
-
 sectionsList.forEach((section) => {
-	observer.observe(section);
+    observer.observe(section);
 });
-
-function setActiveSection(entries, observer){
-    console.log("in setActiveSection function");
-    let targetNavItem;
-    // let observer = new IntersectionObserver((entries, observer) => { 
-		entries.forEach(entry => {
-		if(entry.isIntersecting && entry.intersectionRatio >= 0.50){
-			console.log(entry);
-            document.querySelector('.activeSection').classList.remove('activeSection');
-            document.querySelector('.active').classList.remove('active');
-			// get id of the intersecting section
-			let id = entry.target.getAttribute('id');
-            console.log(id);
-			// find matching link & add appropriate class
-			let newLink = document.querySelector(`[href="#${id}"]`).classList.add('active');
-            let newSection = document.getElementById(id).classList.add('activeSection');
-console.log(newLink);
-            /*
-            // ToDO: remove active class from all sections , and navegation items
-            for (const section of sectionsList) {
-                section.style.display = 'none';
-                section.classList.remove("activeSection");
-            }
-            entry.target.classList.add("activeSection");
-			//entry.target.src = entry.target.dataset.src;
-            // ToDO: Add Active class to the section in viewport, and its item nav
-            for (const navItem of navMenu.children) {
-                navItem.style.display = 'none';
-                navItem.classList.remove("active");
-                if(entry.target.dataset.nav === navItem.innerText){
-                    targetNavItem = navItem;
-                }
-            }
-            targetNavItem.classList.add("active");
-            for (const section of sectionsList) {
-                section.style.display = 'block';
-            }
-            
-            for (const navItem of navMenu.children) {
-                navItem.style.display = 'block';
-            }*/
-           
-           /*  setTimeout(function sayHi() {
-                console.log('Howdy');
-            }, 1000); */
-//			observer.unobserve(entry.target);
-		}
-		});
-	// }, {rootMargin: "0px 0px -200px 0px"});
-// });
-	// sectionsList.forEach(section => { observer.observe(section) });
-    
-}
-// Scroll to anchor ID using scrollTO event
-
-const links = document.querySelectorAll('a');
-const thirdField = links[2];
-for (const navItem of navMenu.children) {
- // TODO: Check the project requerments and tiips to see if the listener on the a link or li element
-    navItem.addEventListener('click', function scrollToSection(event) {
-    console.log('a link clicked');
-    event.preventDefault;
-    navItem.scrollIntoView({behavior:"smooth", block: "center"});
-});   
-}
 
 
 /**
@@ -170,6 +64,59 @@ for (const navItem of navMenu.children) {
 
 // Build menu 
 
+// build the navgation menu
+function buildNavgation() {
+    // Populate the navbar list with nav items
+    for (const section of sectionsList) {
+        // create nave item and its link
+        const navItem = document.createElement('li');
+        const sectionLink = document.createElement('a');
+        sectionLink.href = `#${section.id}`;
+        sectionLink.className = "menu__link";
+        if (section.id === "section1") {
+            sectionLink.classList.add('active');
+        }
+        let sectionNo = section.dataset.nav;
+        sectionLink.innerText = `${sectionNo}`;
 
+        // append the lik to its nav item
+        navItem.appendChild(sectionLink);
+        // add css classes to the nav item
+        navItem.className = "menu__link";
+        // append the nav item to the document fragment
+        navigationFragment.appendChild(navItem);
+    }
+    // Add the document fragment to ul elment
+    navMenu.appendChild(navigationFragment);
+
+}
+
+// Scroll to section using scrollIntoView
+for (const link of links) {
+    link.addEventListener('click', function scrollToSection(event) {
+        event.preventDefault;
+        const selectSection = document.getElementById(link.getAttribute("href").substring(1));
+        selectSection.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+}
 
 // Set sections as active
+function setActiveSection(entries, observer) {
+
+    let targetNavItem;
+    // let observer = new IntersectionObserver((entries, observer) => { 
+    entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.50) {
+
+            document.querySelector('.activeSection').classList.remove('activeSection');
+            document.querySelector('.active').classList.remove('active');
+            // get id of the intersecting section
+            let id = entry.target.getAttribute('id');
+
+            // find matching link & add appropriate class
+            let newLink = document.querySelector(`[href="#${id}"]`).classList.add('active');
+            let newSection = document.getElementById(id).classList.add('activeSection');
+        }
+    });
+
+}

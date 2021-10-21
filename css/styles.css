@@ -64,6 +64,7 @@ section {
 /* ---- Module Rules ---- */
 
 /* Navigation Styles*/
+
 .navbar__menu ul {
     padding-left: 0;
     margin: 0;
@@ -76,7 +77,7 @@ section {
 }
 
 .navbar__menu .menu__link {
-    display: block;
+    display: inline-block;
     padding: 1em;
     font-weight: bold;
     text-decoration: none;
@@ -84,7 +85,6 @@ section {
 }
 
 .navbar__menu .menu__link:hover {
-    background: #333;
     color: #fff;
     transition: ease 0.3s all;
 }
@@ -98,15 +98,13 @@ section {
     }
     .navbar__menu.responsive a {
       float: none;
-      display: block;
+      display: inline-block;
       text-align: left;
     }
   }
 
 .navbar__menu li:active {
     display: inline-block;
-    color: darkred;
-    background-color: olivedrab;
 }
 .navbar__menu a {
     display: block;
