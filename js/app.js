@@ -83,6 +83,15 @@ function buildNavgation() {
         navItem.appendChild(sectionLink);
         // add css classes to the nav item
         navItem.className = "menu__link";
+
+        // Scroll to section using scrollIntoView
+        navItem.addEventListener('click', function (event) {
+            event.preventDefault;
+            // const selectSection = document.getElementById(navItem.getAttribute("href").substring(1));
+            section.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+
+
         // append the nav item to the document fragment
         navigationFragment.appendChild(navItem);
     }
@@ -91,14 +100,7 @@ function buildNavgation() {
 
 }
 
-// Scroll to section using scrollIntoView
-for (const link of links) {
-    link.addEventListener('click', function scrollToSection(event) {
-        event.preventDefault;
-        const selectSection = document.getElementById(link.getAttribute("href").substring(1));
-        selectSection.scrollIntoView({ behavior: "smooth", block: "center" });
-    });
-}
+
 
 // Set sections as active
 function setActiveSection(entries, observer) {
@@ -120,3 +122,19 @@ function setActiveSection(entries, observer) {
     });
 
 }
+
+// add homborger menu when the screen goes small
+const navigationBar = document.getElementById("nav");
+
+function myFunction() {
+	navigationBar.classList.toggle('responsive');
+}
+
+window.addEventListener('resize', () => {
+	if (window.innerWidth >= 600 && navigationBar.classList.contains('responsive')) {
+		navigationBar.classList.remove('responsive');
+	}
+    else{
+        navigationBar.classList.add('responsive');
+    }
+});

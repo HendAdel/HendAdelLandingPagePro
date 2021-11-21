@@ -260,3 +260,25 @@ section.activeSection .landing__container::after {
 		           rotate(-360deg);
 	}
 }
+
+/* For homburger menu on small screen */
+#header_nav nav ul li a.button,
+#header_nav nav ul li span.button {
+  height: 2em;
+  line-height: 2em;
+  padding: 0 1.25em;
+}
+
+#header_nav nav ul li a:not(.button):before,
+#header_nav nav ul li span:not(.button):before {
+  margin-right: 0.5em;
+}
+
+#header_nav nav ul li.active>a,
+#header_nav nav ul li.active>span {
+  color: #e44c65;
+}
+
+#header_nav nav ul li>ul {
+  display: none;
+}
