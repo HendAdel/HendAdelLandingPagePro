@@ -85,9 +85,8 @@ function buildNavgation() {
         navItem.className = "menu__link";
 
         // Scroll to section using scrollIntoView
-        navItem.addEventListener('click', function (event) {
+        sectionLink.addEventListener('click', function (event) {
             event.preventDefault;
-            // const selectSection = document.getElementById(navItem.getAttribute("href").substring(1));
             section.scrollIntoView({ behavior: "smooth", block: "center" });
         });
 
@@ -105,8 +104,7 @@ function buildNavgation() {
 // Set sections as active
 function setActiveSection(entries, observer) {
 
-    let targetNavItem;
-    // let observer = new IntersectionObserver((entries, observer) => { 
+    let targetNavItem;    
     entries.forEach(entry => {
         if (entry.isIntersecting && entry.intersectionRatio >= 0.50) {
 
@@ -123,7 +121,7 @@ function setActiveSection(entries, observer) {
 
 }
 
-// add homborger menu when the screen goes small
+// add responsive when the screen goes small
 const navigationBar = document.getElementById("nav");
 
 function myFunction() {
