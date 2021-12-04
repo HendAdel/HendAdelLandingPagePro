@@ -73,20 +73,18 @@ function buildNavgation() {
         const sectionLink = document.createElement('a');
         sectionLink.href = `#${section.id}`;
         sectionLink.className = "menu__link";
-        if (section.id === "section1") {
-            sectionLink.classList.add('active');
-        }
+        
         let sectionNo = section.dataset.nav;
         sectionLink.innerText = `${sectionNo}`;
 
         // append the lik to its nav item
         navItem.appendChild(sectionLink);
         // add css classes to the nav item
-        navItem.className = "menu__link";
+        navItem.className = "li";
 
         // Scroll to section using scrollIntoView
         sectionLink.addEventListener('click', function (event) {
-            event.preventDefault;
+            event.preventDefault();
             section.scrollIntoView({ behavior: "smooth", block: "center" });
         });
 
@@ -99,40 +97,32 @@ function buildNavgation() {
 
 }
 
-
-
 // Set sections as active
 function setActiveSection(entries, observer) {
 
     let targetNavItem;    
     entries.forEach(entry => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.50) {
-
-            document.querySelector('.activeSection').classList.remove('activeSection');
-            document.querySelector('.active').classList.remove('active');
+        
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.65) {
+            
+            for (const section of sectionsList) {
+                if(section.classList.contains('activeSection')){
+                    section.classList.remove('activeSection');
+                }
+            }
+            for(const link of document.querySelectorAll('.menu__link')){
+            if(document.querySelector('.menu__link').classList.contains('active')){
+                document.querySelector('.active').classList.remove('active');
+            }                   
+            }
             // get id of the intersecting section
             let id = entry.target.getAttribute('id');
-
             // find matching link & add appropriate class
-            let newLink = document.querySelector(`[href="#${id}"]`).classList.add('active');
+            let newLink = document.querySelector(`[href="#${id}"]`);
+            newLink.classList.add('active');
             let newSection = document.getElementById(id).classList.add('activeSection');
         }
     });
 
 }
 
-// add responsive when the screen goes small
-const navigationBar = document.getElementById("nav");
-
-function myFunction() {
-	navigationBar.classList.toggle('responsive');
-}
-
-window.addEventListener('resize', () => {
-	if (window.innerWidth >= 600 && navigationBar.classList.contains('responsive')) {
-		navigationBar.classList.remove('responsive');
-	}
-    else{
-        navigationBar.classList.add('responsive');
-    }
-});

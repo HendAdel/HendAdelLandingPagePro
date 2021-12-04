@@ -7,7 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Manipulating the DOM</title>
   <!-- Load Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:900|Merriweather&display=swap" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Fira+Sans:900|Merriweather&display=swap" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
   <!-- Load Styles -->
   <link href="css/styles.css" rel="stylesheet">
 </head>
@@ -29,7 +30,7 @@
     a data attribute that will populate the li node.
     Adding more sections will automatically populate nav.
     The first section is set to active class by default -->
-    <section id="section1" data-nav="Home" class="activeSection">
+    <section id="section1" data-nav="Home" class="section">
       <div class="landing__container">
         <h2>Home</h2>
         <p>JavaScript is a scripting or programming language that allows you to implement complex features on web pages
@@ -46,7 +47,7 @@
           can achieve with a few lines of JavaScript code.)</p>
       </div>
     </section>
-    <section id="section2" data-nav="JS History">
+    <section id="section2" data-nav="JS History" class="section">
       <div class="landing__container">
         <h2>JS History</h2>
         <p>JavaScript was invented by Brendan Eich in 1995.
@@ -89,7 +90,7 @@
           fully compliant by July 2013</p>
       </div>
     </section>
-    <section id="section3" data-nav="The DOM">
+    <section id="section3" data-nav="The DOM" class="section">
       <div class="landing__container">
         <h2>The DOM</h2>
         <p>When you request a website, no matter what backend language is powering that website, it will respond with
@@ -124,9 +125,12 @@
           accessed using a special object provided by the browser: document</p>
       </div>
     </section>
-    <section id="section4" data-nav="Resources" class="your-active-class">
+    <section id="section4" data-nav="Resources" class="section">
       <div class="landing__container">
         <h2>Resources</h2>
+        <br>
+        <p>In this last section I list The resources that I took from it. hope it will be usfel to you. thank you for reading.</p>
+        <br>
         <p>What is JS scribt in the home section from developer.mozilla:</p>
         <p>https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript</p>
         <br>
