@@ -19,3 +19,6 @@
 > In this function I created the list items, and it's anchors. I stopped the anchors defult behavior, and use scrollIntoView() function instead of it. Then I add the navgation menu to DocumentFragment to keep fast performance.
 ## setActiveSection
 > When scroll to section set this section and its link as active, to Specify which section is the view in it.
+
+## Future addition
+> Add hamburger menu, for easier access sections in small screens.
